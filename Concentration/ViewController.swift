@@ -9,31 +9,28 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var cardButton: UIButton!
-    var ghostIsOn: Bool = false
-    let objects: [String] = ["👻"]
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
-    
-    @IBAction func cardPressed(_ sender: UIButton) {
-        cardFlipped(card: sender)
-        ghostIsOn = !ghostIsOn
-        
+    @IBAction func touchCard(_ sender: UIButton) {
+        flipCard(withEmoji: "👻", on: sender)
     }
     
-    func cardFlipped(card: UIButton) {
-        if ghostIsOn {
-            print(ghostIsOn)
-            card.setTitle("", for: .normal)
-            card.backgroundColor = .systemOrange
-        } else{
-            card.setTitle(objects[0], for: .normal)
-            card.size
-            card.backgroundColor = .white
+    func flipCard(withEmoji emoji: String, on button: UIButton) {
+        print("clicked")
+        if let buttonText = button.titleLabel?.text{
+            print(buttonText)
+            if let buttonText = button.currentTitle {
+                if buttonText == "" {
+                    button.setTitle(emoji, for: UIControl.State.normal)
+                    print("2")
+                    print(button.titleLabel!.text!)
+                    print(button.currentTitle!)
+                }
+            }
+            if buttonText == emoji {
+                button.setTitle("", for: UIControl.State.normal)
+                print("1")
+                print(button.titleLabel!.text!)
+                print(button.currentTitle!)
+            }
         }
     }
 }
